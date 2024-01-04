@@ -71,7 +71,10 @@ The User Management System is a full-stack web application that allows users to 
    npm install
    ```
 
-3. [Any other setup instructions, environment variables, etc.]
+3. Set the  environment variables.
+mongoUrl=your_Database
+JWT_Secret=you_JwtSecret
+
 
 4. Run the application:
    ```bash
