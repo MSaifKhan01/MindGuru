@@ -1,16 +1,20 @@
 import React from "react";
-// import { Link, useNavigate } from "react-router-dom";
+
 import { Link} from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import "../CSS/Navbar.css";
 
 const Navbar = () => {
   const auth = localStorage.getItem("user");
-//   const navigate = useNavigate(); // Uncomment this line if you want to use useNavigate
+  const navigate=useNavigate()
 
   const logout = () => {
+   
     localStorage.removeItem("user");
     sessionStorage.removeItem("token");
-    // navigate("/"); // Uncomment this line if you want to use useNavigate
+    sessionStorage.removeItem("userID");
+    navigate("/")
+  
   };
 
   return (
@@ -24,13 +28,13 @@ const Navbar = () => {
       {auth ? (
         <ul>
           <li>
-            <Link to="/Home">Home</Link>
+            <Link to="/">Home</Link>
           </li>
           <li>
             <Link to="/user/add">Add A User</Link>
           </li>
           <li>
-            <Link to="/user/Team">All Users Added By you</Link>
+            <Link to="/">All Users Added By you</Link>
           </li>
           <li>
             <Link onClick={logout} to="/">
@@ -48,6 +52,9 @@ const Navbar = () => {
           </li>
           <li>
             <Link to="/Login">Login</Link>
+          </li>
+          <li>
+            <Link to="/SignUp">SignUp</Link>
           </li>
         </ul>
       )}

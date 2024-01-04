@@ -96,9 +96,12 @@ userRouter.post("/Login", async(req, res)=>{
 });
 
 // Getting all users
-userRouter.get("/All-Users", async(req, res)=>{
+userRouter.get("/All-Users",Auth, async(req, res)=>{
+let token=req.headers.authorization;
+let decoded=jwt.verify(token,process.env.JWT_Secret);
+console.log("gthhj",token)
   try{
-    const query={};
+    const query={userID:decoded.userID};
 
   
 
@@ -115,9 +118,13 @@ userRouter.get("/All-Users", async(req, res)=>{
     }
 
     const page= Number(req.query.page);
-    const limit=20;
-    let usersDataLength= await UserListModel.find().count();
-    totalPage= Math.ceil(usersDataLength / 20);
+    const limit=5;
+    // let usersDataLength= await UserListModel.find().count();
+    let usersDataLength = await UserListModel.countDocuments({ userID: decoded.userID });
+
+
+
+    totalPage= Math.ceil(usersDataLength / 5);
     // console.log("totalPages",totalPage)
 
     // searching functionality
@@ -148,7 +155,7 @@ userRouter.get("/All-Users", async(req, res)=>{
     let users;
 
     if(page){
-      // If page is provided, apply pagination
+     
       users= await UserListModel
         .find(query)
         .sort({[sortField]:sortDirection })
@@ -226,7 +233,7 @@ userRouter.delete("/Delete/:id",Auth, async(req, res)=>{
 
 
 
-userRouter.post("/Add-User",Auth,  async(req, res)=>{
+userRouter.post("/Add",Auth,  async(req, res)=>{
     try{
       const token= req.headers.authorization;
       const decoded= jwt.verify(token, process.env.JWT_Secret);

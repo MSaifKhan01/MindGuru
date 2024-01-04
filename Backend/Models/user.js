@@ -5,7 +5,7 @@ const userSchema= new mongoose.Schema({
   email:String,
   phone:String,
   gender:String,
-  heardAbout:String,
+  heardAbout:[],
   city:String,
   state:String,
   userID:{type: mongoose.Schema.Types.ObjectId, ref: "User"},

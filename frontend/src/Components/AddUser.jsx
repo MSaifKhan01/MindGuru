@@ -1,7 +1,6 @@
-import React,{useState} from "react";
-import { useNavigate } from "react-router-dom";
+import React,{ useState } from "react";
+import {useNavigate} from "react-router-dom";
 import axios from "axios";
-
 import Swal from "sweetalert2";
 import "../CSS/Signup.css";
 
@@ -42,28 +41,28 @@ const statesList=[
   "Puducherry",
 ];
 
-const SignupForm=()=>{
+const AddUserForm=()=>{
   const navigate=useNavigate()
   const [formData,setFormData]=useState({
     name:"",
     email:"",
-    phoneNumber:"",
-    password:"",
+    phone:"",
     gender:"Male",
     heardAbout:"",
-    customCity:"",
+    city:"",
     state:"",
   });
   const [selectedState,setSelectedState]=useState("");
 
   const StateSelectFun=(e)=>{
     setSelectedState(e.target.value);
+    setFormData((prevData)=>({...prevData, state: e.target.value}));
   };
 
   const CheckboxForJobFun=(value)=>{
     setFormData((prevData)=>({
       ...prevData,
-      heardAbout:prevData.heardAbout.includes(value)
+      heardAbout: prevData.heardAbout.includes(value)
         ? prevData.heardAbout.filter((item)=>item !==value)
         :[...prevData.heardAbout,value],
     }));
@@ -76,45 +75,49 @@ const SignupForm=()=>{
 
   const SubmitFormDataFun=async(e)=>{
     e.preventDefault();
-  
 
     try{
-      const res=await axios.post(
-        "http://localhost:5039/User/Signup",
-        formData
-      );
-
-      console.log(res.data);
-
-
-      setFormData({
-        name:"",
-        email:"",
-        phoneNumber:"",
-        password:"password",
-        gender:"Male",
-        heardAbout:"",
-        customCity:"",
-        state:"",
-      });
-
-      Swal.fire({
-        title:"Hello!",
-        text:res.data.msg,
-        icon:"success",
-        confirmButtonText:"OK",
-      });
-
-        navigate('/Login'); 
-    }catch(error){
-      console.error("Error during signup:",error);
-    }
-    console.log("Form data submitted:",formData);
-  };
+        const token=sessionStorage.getItem('token');
+        const res=await axios.post(
+          "http://localhost:5039/User/Add",
+          formData,
+          {
+            headers:{
+              Authorization:`${token}`, 
+            
+            },
+          }
+        );
+    
+     
+        console.log("Form data submitted:",res.data);
+    
+      
+        setFormData({
+          name:"",
+          email:"",
+          phone:"",
+          gender:"Male",
+          heardAbout:"",
+          city:"",
+          state:"",
+        });
+    
+        Swal.fire({
+          title:"Hello!",
+          text:res.data.msg,
+          icon:"success",
+          confirmButtonText:"OK",
+        });
+        navigate("/")
+      }catch(error){
+        console.error("Error during signup:",error);
+      }
+    };
 
   return (
     <div>
-      <h2>SignUp</h2>
+      <h2>Add User</h2>
       <form onSubmit={SubmitFormDataFun}>
         <label>
           Name:
@@ -140,20 +143,10 @@ const SignupForm=()=>{
           Phone:
           <input
             type="tel"
-            name="phoneNumber"
-            value={formData.phoneNumber}
+            name="phone"
+            value={formData.phone}
             onChange={ValueTakingFun}
             pattern="[0-9]+"
-          />
-        </label>
-        <label>
-          Password:
-          <input
-            type="password"
-            name="password"
-            value={formData.password}
-            onChange={ValueTakingFun}
-           
           />
         </label>
         <label>
@@ -242,8 +235,8 @@ const SignupForm=()=>{
           City:
           <input
             type="text"
-            name="customCity"
-            value={formData.customCity}
+            name="city"
+            value={formData.city}
             onChange={ValueTakingFun}
           />
         </label>
@@ -272,4 +265,4 @@ const SignupForm=()=>{
   );
 };
 
-export default SignupForm;
+export default AddUserForm;
