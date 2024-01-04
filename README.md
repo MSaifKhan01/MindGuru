@@ -72,8 +72,11 @@ The User Management System is a full-stack web application that allows users to 
    ```
 
 3. Set the  environment variables.
+
+```bash
 mongoUrl=your_Database
 JWT_Secret=you_JwtSecret
+```
 
 
 4. Run the application:
