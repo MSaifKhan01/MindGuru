@@ -12,7 +12,7 @@ const UserDetail=()=>{
     const fetchUser=async()=>{
       try {
         const token=sessionStorage.getItem('token');
-        const Res=await axios.get(`http://localhost:5039/User/${params.id}`,{
+        const Res=await axios.get(`https://mindgurubackend.onrender.com/User/${params.id}`,{
           headers:{
             Authorization:`${token}`,
           },

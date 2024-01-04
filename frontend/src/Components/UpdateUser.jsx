@@ -15,7 +15,7 @@ const UpdateUser=()=>{
     useEffect(()=>{
       const UserDetails=async()=>{
         try{
-          let result=await fetch(`http://localhost:5039/User/${params.id}`,{
+          let result=await fetch(`https://mindgurubackend.onrender.com/User/${params.id}`,{
             headers:{
               Authorization:`${token}`,
             },
@@ -36,7 +36,7 @@ const UpdateUser=()=>{
   
     const updateUser=async()=>{
       try{
-        let result=await fetch(`http://localhost:5039/User/Update/${params.id}`,{
+        let result=await fetch(`https://mindgurubackend.onrender.com/User/Update/${params.id}`,{
           method:"PUT",
           body:JSON.stringify({
             name,

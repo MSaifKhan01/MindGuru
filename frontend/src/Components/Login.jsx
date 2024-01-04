@@ -23,7 +23,7 @@ const LoginForm=()=>{
     e.preventDefault(); 
 
     try{
-      const Res= await axios.post('http://localhost:5039/User/Login',formData);
+      const Res= await axios.post('https://mindgurubackend.onrender.com/User/Login',formData);
       console.log(Res.data)
 
       sessionStorage.setItem('userID',Res.data.UserPresent._id);

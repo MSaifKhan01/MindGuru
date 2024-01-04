@@ -26,7 +26,7 @@ const UserList=()=>{
   const DeleteUserFun=async(userId)=>{
     try{
       const Res=await axios.delete(
-        `http://localhost:5039/User/Delete/${userId}`,{
+        `https://mindgurubackend.onrender.com/User/Delete/${userId}`,{
           headers:{
             Authorization:`${sessionStorage.getItem('token')}`,
           }
@@ -55,7 +55,7 @@ const UserList=()=>{
     console.log(token)
     try {
       const Res=await axios.get(
-        `http://localhost:5039/User/All-Users?page=${page}&search=${searchQuery}&sort=${sortOrder}&sortField=${sortField}`,
+        `https://mindgurubackend.onrender.com/User/All-Users?page=${page}&search=${searchQuery}&sort=${sortOrder}&sortField=${sortField}`,
         {
           params: filters,
           headers: {

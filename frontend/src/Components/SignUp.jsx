@@ -80,7 +80,7 @@ const SignupForm=()=>{
 
     try{
       const res=await axios.post(
-        "http://localhost:5039/User/Signup",
+        "https://mindgurubackend.onrender.com/User/Signup",
         formData
       );
 

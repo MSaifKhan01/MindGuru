@@ -98,8 +98,10 @@ userRouter.post("/Login", async(req, res)=>{
 // Getting all users
 userRouter.get("/All-Users",Auth, async(req, res)=>{
 let token=req.headers.authorization;
-let decoded=jwt.verify(token,process.env.JWT_Secret);
+
 console.log("gthhj",token)
+if(token){
+  let decoded=jwt.verify(token,process.env.JWT_Secret);
   try{
     const query={userID:decoded.userID};
 
@@ -170,6 +172,9 @@ console.log("gthhj",token)
   }catch(error){
     res.status(500).send({ error: "Internal Server Error" });
   }
+}else{
+  res.status(400).send("You need to Login again")
+}
 });
 
 // Getting user by id

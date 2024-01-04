@@ -79,7 +79,7 @@ const AddUserForm=()=>{
     try{
         const token=sessionStorage.getItem('token');
         const res=await axios.post(
-          "http://localhost:5039/User/Add",
+          "https://mindgurubackend.onrender.com/User/Add",
           formData,
           {
             headers:{
