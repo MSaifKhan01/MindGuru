@@ -13,6 +13,7 @@ const Navbar = () => {
     localStorage.removeItem("user");
     sessionStorage.removeItem("token");
     sessionStorage.removeItem("userID");
+    window.location.reload();
     navigate("/")
   
   };
