@@ -175,6 +175,7 @@ if(token){
 }else{
   res.status(400).send("You need to Login again")
 }
+
 });
 
 // Getting user by id
@@ -265,9 +266,9 @@ userRouter.post("/Add",Auth,  async(req, res)=>{
   
         await newTeam.save();
   
-        res.status(201).send({data: newTeam,msg: "Member Added successfully"});
+        res.status(201).send({data: newTeam,msg: "User Added successfully"});
       }else{
-        res.status(200).send({msg: "Member already exists in the team"});
+        res.status(200).send({msg: "Member already exists in the Data Base"});
       }
     }catch(error){
      
