@@ -88,7 +88,11 @@ const UserList=()=>{
   };
 
   useEffect(() => {
-    fetchUsers();
+    if(token){
+      fetchUsers();
+
+    }
+   
   },[searchQuery,page,filters,sortOrder,sortField]);
 
   return(
